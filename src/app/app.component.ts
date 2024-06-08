@@ -36,7 +36,7 @@ export class AppComponent {
       frameSize: new Position(32, 32),
       horizontalFrames: 3,
       verticalFrames: 8,
-      frame: 1
+      frame: 1,
     } as unknown as SpriteContext);
   }
 
@@ -49,12 +49,20 @@ export class AppComponent {
     stationary.forEach((asset) => {
       const sprite = new Sprite({
         asset,
-        frameSize: new Position(320, 180)
+        frameSize: new Position(320, 180),
       } as unknown as SpriteContext);
 
-      sprite.renderSprite(this.context as unknown as CanvasRenderingContext2D, 0, 0);
+      sprite.renderSprite(
+        this.context as unknown as CanvasRenderingContext2D,
+        0,
+        0,
+      );
     });
 
-    this.hero.renderSprite(this.context as unknown as CanvasRenderingContext2D, 16 * 5, 16 * 5);
+    this.hero.renderSprite(
+      this.context as unknown as CanvasRenderingContext2D,
+      16 * 5,
+      16 * 5,
+    );
   }
 }
