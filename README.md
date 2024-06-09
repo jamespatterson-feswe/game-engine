@@ -2,6 +2,20 @@
 
 A very minimal game engine that will currently render static images into a canvas within a browser. The hero can move dynamically based on user input.
 
+## Angular
+
+### Version
+17
+
+### Language
+Typescript
+
+### Stylesheet Format
+SCSS
+
+### SSR
+No
+
 ## Installation
 
 Use a package manager, such as npm or pnpm, to install Game Engine.
