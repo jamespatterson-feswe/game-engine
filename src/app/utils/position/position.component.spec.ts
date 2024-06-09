@@ -41,7 +41,12 @@ describe('Position', () => {
       testPosition.movePositions(undefined as unknown as Position);
       expect(testPosition.x).toBe(4);
       expect(testPosition.y).toBe(2);
-      testPosition.movePositions(new Position(undefined as unknown as number, undefined as unknown as number));
+      testPosition.movePositions(
+        new Position(
+          undefined as unknown as number,
+          undefined as unknown as number,
+        ),
+      );
       expect(testPosition.x).toBe(4);
       expect(testPosition.y).toBe(2);
     });

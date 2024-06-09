@@ -2,15 +2,18 @@ import { DestroyRef, Injectable, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { timer } from 'rxjs';
 import { Asset, Position, Resources, Sprite, SpriteContext } from '../utils';
+import { UserInput } from '../utils/userInput/user-input.class';
 
 @Injectable()
 export class GameLoop {
   private destroyRef = inject(DestroyRef);
   private fps = 1000 / 60;
   private hero!: Sprite;
+  private heroPosition: Position = new Position(16 * 6, 16 * 5);
   private isGameStarted = false;
   private isRunning = false;
   private resources = new Resources();
+  private userInput = new UserInput();
 
   constructor() {
     this.hero = new Sprite({
@@ -20,6 +23,10 @@ export class GameLoop {
       verticalFrames: 8,
       frame: 1,
     } as unknown as SpriteContext);
+
+    this.userInput.movementPostition$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((value) => this.heroPosition.movePositions(value));
 
     timer(this.fps, this.fps)
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -58,10 +65,9 @@ export class GameLoop {
       sprite.renderSprite(context as unknown as CanvasRenderingContext2D, 0, 0);
     });
 
-    const heroPosition = new Position(16 * 6, 16 * 5);
     const heroOffset = new Position(-8, -21);
-    const heroPosX = heroPosition.x + heroOffset.x;
-    const heroPosY = heroPosition.y + heroOffset.y;
+    const heroPosX = this.heroPosition.x + heroOffset.x;
+    const heroPosY = this.heroPosition.y + heroOffset.y;
     let shadowPosX = heroPosX;
     let shadowPosY = heroPosY;
 

@@ -1,10 +1,17 @@
 import { Position } from '../../position';
 
-export const keyCodes = ['KeyA', 'KeyW', 'KeyD', 'KeyS'];
+export const defaultMovement = new Position(0, 0);
 
-export const keyCodeMap: Map<string, Position> = new Map();
+export const enum Movements {
+  LEFT = 'KeyA',
+  UP = 'KeyW',
+  RIGHT = 'KeyD',
+  DOWN = 'KeyS',
+}
 
-keyCodeMap.set(keyCodes[0], new Position(-1, 0));
-keyCodeMap.set(keyCodes[1], new Position(0, 1));
-keyCodeMap.set(keyCodes[2], new Position(1, 0));
-keyCodeMap.set(keyCodes[3], new Position(0, -1));
+export const keyCodeMap: Map<Movements, Position> = new Map();
+
+keyCodeMap.set(Movements.LEFT, new Position(-1, 0));
+keyCodeMap.set(Movements.UP, new Position(0, -1));
+keyCodeMap.set(Movements.RIGHT, new Position(1, 0));
+keyCodeMap.set(Movements.DOWN, new Position(0, 1));
