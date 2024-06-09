@@ -59,10 +59,35 @@ export class AppComponent {
       );
     });
 
+    const heroPosition = new Position(16 * 6, 16 * 5);
+    const heroOffset = new Position(-8, -21);
+    const heroPosX = heroPosition.x + heroOffset.x;
+    const heroPosY = heroPosition.y + heroOffset.y;
+    let shadowPosX = heroPosX;
+    let shadowPosY = heroPosY;
+
+    const shadow = new Sprite({
+      asset: this.resources.availableAssets['shadow'] as unknown as Asset,
+      frameSize: new Position(32, 32)
+    } as unknown as SpriteContext);
+
+    var currentHours = new Date().getHours();
+    if (currentHours > 12) {
+      shadowPosX += (currentHours / 10);
+    } else {
+      shadowPosX -= ((12 - currentHours)/10);
+    }
+
+    shadow.renderSprite(
+      this.context as unknown as CanvasRenderingContext2D,
+      shadowPosX,
+      shadowPosY
+    );
+
     this.hero.renderSprite(
       this.context as unknown as CanvasRenderingContext2D,
-      16 * 5,
-      16 * 5,
+      heroPosX,
+      heroPosY
     );
   }
 }
