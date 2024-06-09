@@ -2,19 +2,9 @@
 
 A very minimal game engine that will currently render static images into a canvas within a browser. The hero can move dynamically based on user input.
 
-## Angular
+## Project Details
 
-### Version
-17
-
-### Language
-Typescript
-
-### Stylesheet Format
-SCSS
-
-### SSR
-No
+Angular 17, Typescript, SCSS, HTML5, RxJS
 
 ## Installation
 
