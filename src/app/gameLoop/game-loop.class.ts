@@ -1,12 +1,12 @@
-import { DestroyRef, Injectable, inject } from "@angular/core";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { timer } from "rxjs";
-import { Asset, Position, Resources, Sprite, SpriteContext } from "../utils";
+import { DestroyRef, Injectable, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { timer } from 'rxjs';
+import { Asset, Position, Resources, Sprite, SpriteContext } from '../utils';
 
 @Injectable()
 export class GameLoop {
   private destroyRef = inject(DestroyRef);
-  private fps = 1000/60;
+  private fps = 1000 / 60;
   private hero!: Sprite;
   private isGameStarted = false;
   private isRunning = false;
@@ -45,7 +45,8 @@ export class GameLoop {
       this.resources.availableAssets['ground'],
     ];
 
-    const canvas: HTMLCanvasElement | null = document.querySelector('#game-canvas');
+    const canvas: HTMLCanvasElement | null =
+      document.querySelector('#game-canvas');
     const context = canvas?.getContext('2d');
 
     stationary.forEach((asset) => {
@@ -54,11 +55,7 @@ export class GameLoop {
         frameSize: new Position(320, 180),
       } as unknown as SpriteContext);
 
-      sprite.renderSprite(
-        context as unknown as CanvasRenderingContext2D,
-        0,
-        0,
-      );
+      sprite.renderSprite(context as unknown as CanvasRenderingContext2D, 0, 0);
     });
 
     const heroPosition = new Position(16 * 6, 16 * 5);
