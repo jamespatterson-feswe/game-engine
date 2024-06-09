@@ -1,0 +1,21 @@
+#game-canvas {
+  background-color: black;
+  max-height: 80vh;
+  width: 95vw;
+
+  margin: 2.5vw 2.5vw 0;
+}
+
+#game-hud {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // American Flag Red: #AC2132;
+  color: white;
+  background-color: #3A396B;
+  height: 5vh;
+  width: 95vw;
+
+  margin: 0 2.5vw;
+}

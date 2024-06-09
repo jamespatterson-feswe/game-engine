@@ -26,7 +26,11 @@ export class GameLoop {
 
     this.userInput.movementPostition$
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((value) => this.heroPosition.movePositions(value));
+      .subscribe((value) => {
+        if (this.isRunning) {
+          this.heroPosition.movePositions(value);
+        }
+      });
 
     timer(this.fps, this.fps)
       .pipe(takeUntilDestroyed(this.destroyRef))

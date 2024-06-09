@@ -1,6 +1,6 @@
 import { DestroyRef, Injectable, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, fromEvent, share } from 'rxjs';
+import { BehaviorSubject, fromEvent } from 'rxjs';
 import {
   Movements,
   defaultMovement,
