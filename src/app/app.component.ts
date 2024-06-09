@@ -6,6 +6,6 @@ import { CanvasComponent } from './components';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, CanvasComponent],
-  template: `<app-canvas></app-canvas>`
+  template: `<app-canvas></app-canvas>`,
 })
 export class AppComponent {}

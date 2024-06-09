@@ -13,11 +13,11 @@ interface Hero {
     name: string;
     hp: number;
   }[];
-  summons: string[]
+  summons: string[];
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HeroServiceService {
   protected hero: Hero = {
@@ -26,26 +26,24 @@ export class HeroServiceService {
     name: 'Max Fury',
     moves: {
       punch: {
-        hp: 25
+        hp: 25,
       },
       kick: {
-        hp: 35
-      }
+        hp: 35,
+      },
     },
     specials: [
       {
         name: 'Reagan Ramble',
-        hp: 55
-      }
+        hp: 55,
+      },
     ],
-    summons: ['American Bald Eagle']
+    summons: ['American Bald Eagle'],
   };
 
-  constructor() { }
-
+  constructor() {}
 
   public getHero(): Hero {
     return this.hero;
   }
-
 }
