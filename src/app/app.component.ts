@@ -59,6 +59,7 @@ export class AppComponent {
       );
     });
 
+    /** @todo Abstract the following logic and create a more dynamic approach */
     const heroPosition = new Position(16 * 6, 16 * 5);
     const heroOffset = new Position(-8, -21);
     const heroPosX = heroPosition.x + heroOffset.x;
@@ -68,26 +69,26 @@ export class AppComponent {
 
     const shadow = new Sprite({
       asset: this.resources.availableAssets['shadow'] as unknown as Asset,
-      frameSize: new Position(32, 32)
+      frameSize: new Position(32, 32),
     } as unknown as SpriteContext);
 
     var currentHours = new Date().getHours();
     if (currentHours > 12) {
-      shadowPosX += (currentHours / 10);
+      shadowPosX += currentHours / 10;
     } else {
-      shadowPosX -= ((12 - currentHours)/10);
+      shadowPosX -= (12 - currentHours) / 10;
     }
 
     shadow.renderSprite(
       this.context as unknown as CanvasRenderingContext2D,
       shadowPosX,
-      shadowPosY
+      shadowPosY,
     );
 
     this.hero.renderSprite(
       this.context as unknown as CanvasRenderingContext2D,
       heroPosX,
-      heroPosY
+      heroPosY,
     );
   }
 }
