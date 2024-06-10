@@ -46,4 +46,14 @@ export class Position {
     this.x = (position?.x || 0) + this.x;
     this.y = (position?.y || 0) + this.y;
   }
+
+  /**
+   * @description To transform a position into a [x, y] format
+   *
+   * @function getNumberedCoordinates
+   * @return {numbers[]}
+   */
+  public getNumberedCoordinates(): number[] {
+    return [this.x, this.y];
+  }
 }

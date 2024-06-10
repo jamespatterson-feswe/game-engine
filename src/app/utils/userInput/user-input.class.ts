@@ -11,7 +11,8 @@ import { Position } from '../position';
 @Injectable()
 export class UserInput {
   private destroyRef = inject(DestroyRef);
-  public movementPostition$ = new BehaviorSubject<Position>(defaultMovement);
+  private movementPostition = new BehaviorSubject<Position>(defaultMovement);
+  public movementPostition$ = this.movementPostition.asObservable();
 
   constructor() {
     fromEvent(window, 'keydown')
@@ -22,12 +23,8 @@ export class UserInput {
         );
 
         if (movement) {
-          this.movementPostition$.next(movement);
+          this.movementPostition.next(movement);
         }
       });
-  }
-
-  public movementRendered(): void {
-    this.movementPostition$.next(defaultMovement);
   }
 }
