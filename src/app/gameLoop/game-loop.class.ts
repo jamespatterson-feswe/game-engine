@@ -40,8 +40,12 @@ export class GameLoop {
           const context = canvas?.getContext('2d');
 
           if (context) {
-            this.renderStationary(context as unknown as CanvasRenderingContext2D);
-            this.heroService.renderHero(context as unknown as CanvasRenderingContext2D);
+            this.renderStationary(
+              context as unknown as CanvasRenderingContext2D,
+            );
+            this.heroService.renderHero(
+              context as unknown as CanvasRenderingContext2D,
+            );
           }
         }
       });

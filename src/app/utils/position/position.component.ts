@@ -6,6 +6,7 @@ import { walls } from './config/position.config';
  *
  * @param {number} x A number that would coordinate to the horizontal location of the player
  * @param {number} y A number that would coordinate to the vertical location of the player
+ * @param {boolean} withGridCells Indicates if the frame size offset should be added
  */
 @Injectable()
 export class Position {
@@ -34,11 +35,10 @@ export class Position {
    * @returns {Position}
    */
   public combinedPositions(position: Position): Position {
-    const xPos = position.x + this.x;
-    const yPos = position.y + this.y;
-    const newPosition = new Position(xPos ?? 0, yPos ?? 0);
-
-    return newPosition;
+    return new Position(
+      (position?.x || 0) + this.x,
+      (position?.y || 0) + this.y,
+    );
   }
 
   /**

@@ -63,7 +63,7 @@ export class HeroService {
    * @description To return the created Sprite for the 'hero'
    *
    * @function getHero
-   * @returns {Sprite}
+   * @returns {Sprite} Hero
    */
   public getHero(): Sprite {
     return this.hero;
@@ -92,8 +92,10 @@ export class HeroService {
 
   public renderHero(context: CanvasRenderingContext2D): void {
     const heroOffset = new Position(-8, -21);
+
     const heroPosX = this.heroPosition.x + heroOffset.x;
     const heroPosY = this.heroPosition.y + heroOffset.y;
+
     let shadowPosX = heroPosX;
     let shadowPosY = heroPosY;
 

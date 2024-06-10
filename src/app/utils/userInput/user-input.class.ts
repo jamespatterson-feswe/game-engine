@@ -22,6 +22,8 @@ export class UserInput {
           (value as unknown as KeyboardEvent).code as Movements,
         );
 
+        /** @todo Add in dynamic frames for the hero, mimic walking, running, etc */
+
         if (movement) {
           this.movementPostition.next(movement);
         }
