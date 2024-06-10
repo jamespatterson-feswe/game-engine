@@ -9,7 +9,9 @@ import { GameLoop } from '../../gameLoop';
   template: `
     <canvas id="game-canvas"></canvas>
     <div id="game-hud">
-      <p id="hud-option">Name: <span id="option-details">Ronald Abraham Washington the 3rd</span></p>
+      <p id="hud-option">
+        Name: <span id="option-details">Ronald Abraham Washington the 3rd</span>
+      </p>
       <p id="hud-option">HP: <span id="option-details">100</span></p>
       <p id="hud-option">AP: <span id="option-details">50</span></p>
     </div>

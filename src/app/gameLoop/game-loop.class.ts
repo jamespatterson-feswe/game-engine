@@ -29,7 +29,9 @@ export class GameLoop {
       .subscribe((value) => {
         if (this.isRunning) {
           const positionToMoveTo = new Position(value.x, value.y, true);
-          const finalPosition = positionToMoveTo.combinedPositions(this.heroPosition);
+          const finalPosition = positionToMoveTo.combinedPositions(
+            this.heroPosition,
+          );
           console.log(finalPosition);
           if (finalPosition.isSpaceFree()) {
             this.heroPosition.movePositions(positionToMoveTo);

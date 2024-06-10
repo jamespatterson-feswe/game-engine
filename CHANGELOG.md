@@ -15,7 +15,9 @@
 - Display mocked hit points on UI
 
 (06/09/2024): [jamespatterson-feswe](https://www.linkedin.com/in/james-earl-patterson/)
+
 - Added 16 to the movement of each x and y coordinate of the hero
 - Started adding grids for walls
 - Should give the ability to stop the hero from walking into certain items: wall, water, etc
 - Plan to replace with dynamic generation using hit collision boxes with the png
+- Add constant, walls, that is used to stop the hero from moving to that square

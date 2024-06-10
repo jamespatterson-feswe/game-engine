@@ -12,7 +12,7 @@ export class Position {
   constructor(
     @Inject('x') public x: number,
     @Inject('y') public y: number,
-    @Inject('withGridCells') public withGridCells: boolean = false
+    @Inject('withGridCells') public withGridCells: boolean = false,
   ) {
     if (typeof this.x !== 'number') {
       this.x = 0;
