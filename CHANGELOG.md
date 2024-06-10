@@ -21,3 +21,5 @@
 - Should give the ability to stop the hero from walking into certain items: wall, water, etc
 - Plan to replace with dynamic generation using hit collision boxes with the png
 - Add constant, walls, that is used to stop the hero from moving to that square
+- Clean up game loop class, move Hero rendering to Hero Service
+- Add positions the Hero cannot walk into for collision
