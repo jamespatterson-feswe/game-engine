@@ -23,6 +23,3 @@ export const walls = new Set();
   '208,64',
   '224,32',
 ].forEach((coordinate: string) => walls.add(coordinate));
-
-// export const level
-// x: 32, y: 112
