@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
+import { walls } from './config/position.config';
 
 /**
  * @class Position
@@ -11,12 +12,17 @@ export class Position {
   constructor(
     @Inject('x') public x: number,
     @Inject('y') public y: number,
+    @Inject('withGridCells') public withGridCells: boolean = false
   ) {
     if (typeof this.x !== 'number') {
       this.x = 0;
     }
     if (typeof this.y !== 'number') {
       this.y = 0;
+    }
+    if (withGridCells) {
+      this.x = this.gridCells(this.x);
+      this.y = this.gridCells(this.y);
     }
   }
 
@@ -48,12 +54,26 @@ export class Position {
   }
 
   /**
-   * @description To transform a position into a [x, y] format
+   * @description To return any grid cell multiplied by 16 since our image is 16x16
    *
-   * @function getNumberedCoordinates
-   * @return {numbers[]}
+   * @function gridCells
+   * @param {number} value A number that will be manipulated and returned
+   * @returns {number}
    */
-  public getNumberedCoordinates(): number[] {
-    return [this.x, this.y];
+  public gridCells(value: number): number {
+    return (value || 0) * 16;
+  }
+
+  /**
+   * @description To check if the coordinates provided are safe given the walls set
+   *
+   * @function isSpaceFree
+   * @param {Set<string>} walls A set of coordinates the hero cannot proceed to
+   * @param {number} x coordinate
+   * @param {number} y coordinate
+   * @returns {boolean}
+   */
+  public isSpaceFree(): boolean {
+    return !walls.has(`${this.x},${this.y}`);
   }
 }

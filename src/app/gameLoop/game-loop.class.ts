@@ -3,13 +3,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { timer } from 'rxjs';
 import { Asset, Position, Resources, Sprite, SpriteContext } from '../utils';
 import { UserInput } from '../utils/userInput/user-input.class';
-import { Grid } from '../utils/grid';
 
 @Injectable()
 export class GameLoop {
   private destroyRef = inject(DestroyRef);
   private fps = 1000 / 60;
-  private grid = new Grid();
   private hero!: Sprite;
   private heroPosition: Position = new Position(16 * 6, 16 * 5);
   private isGameStarted = false;
@@ -30,13 +28,12 @@ export class GameLoop {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((value) => {
         if (this.isRunning) {
-          const [x, y] = value.getNumberedCoordinates();
-          const newPosition = new Position(
-            this.grid.gridCells(x),
-            this.grid.gridCells(y),
-          );
-
-          this.heroPosition.movePositions(newPosition);
+          const positionToMoveTo = new Position(value.x, value.y, true);
+          const finalPosition = positionToMoveTo.combinedPositions(this.heroPosition);
+          console.log(finalPosition);
+          if (finalPosition.isSpaceFree()) {
+            this.heroPosition.movePositions(positionToMoveTo);
+          }
         }
       });
 

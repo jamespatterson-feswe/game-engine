@@ -1,2 +1,2 @@
 export * from './canvas.component';
-export * from './config/canvas.config';
+export * from '../../utils/position/config/position.config';
