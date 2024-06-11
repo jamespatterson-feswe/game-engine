@@ -90,7 +90,13 @@ export class HeroService {
     return this.heroDetails;
   }
 
-  public renderHero(context: CanvasRenderingContext2D): void {
+  public setHeroFrame(frame: number = 1): void {
+    if ((frame || -1) > -1) {
+      this.hero.context.frame = frame as unknown as number;
+    }
+  }
+
+  public renderHero(context: CanvasRenderingContext2D, frame?: number): void {
     const heroOffset = new Position(-8, -21);
 
     const heroPosX = this.heroPosition.x + heroOffset.x;

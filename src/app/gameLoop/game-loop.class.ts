@@ -1,7 +1,15 @@
 import { DestroyRef, Injectable, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { timer } from 'rxjs';
-import { Asset, Position, Resources, Sprite, SpriteContext } from '../utils';
+import { mergeMap, timer } from 'rxjs';
+import {
+  AnimationDirections,
+  Position,
+  Resources,
+  Sprite,
+  SpriteContext,
+  walkingAnimations,
+  PartialFrame,
+} from '../utils';
 import { UserInput } from '../utils/userInput/user-input.class';
 import { HeroService } from '../services';
 import { fps } from '.';
@@ -14,8 +22,26 @@ export class GameLoop {
   private hasGameStarted = false;
   private isRunning = false;
   private userInput = new UserInput();
+  private walkingAnimation!: PartialFrame[];
 
   constructor() {
+    this.userInput.movementDirection$
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        mergeMap((direction: AnimationDirections) => {
+          this.walkingAnimation = walkingAnimations[direction].frames;
+          return timer(100, 400);
+        }),
+      )
+      .subscribe(() => {
+        const animation = this.walkingAnimation[0];
+
+        this.heroService.setHeroFrame(animation.frame);
+
+        this.walkingAnimation.reverse().pop();
+        this.walkingAnimation.reverse().push(animation);
+      });
+
     this.userInput.movementPostition$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((value) => {
@@ -35,9 +61,7 @@ export class GameLoop {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         if (this.hasGameStarted && this.isRunning) {
-          const canvas: HTMLCanvasElement | null =
-            document.querySelector('#game-canvas');
-          const context = canvas?.getContext('2d');
+          const context = this.getContext();
 
           if (context) {
             this.renderStationary(
@@ -49,6 +73,12 @@ export class GameLoop {
           }
         }
       });
+  }
+
+  private getContext(): CanvasRenderingContext2D | null | undefined {
+    const canvas: HTMLCanvasElement | null =
+      document.querySelector('#game-canvas');
+    return canvas?.getContext('2d');
   }
 
   public run(): void {
