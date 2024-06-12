@@ -1,63 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Asset, Position, Resources, Sprite, SpriteContext } from '../../utils';
-
-interface HeroDetails {
-  hp: number;
-  ap: number;
-  name: string;
-  moves: {
-    [k: string]: {
-      hp: number;
-    };
-  };
-  specials: {
-    name: string;
-    hp: number;
-  }[];
-  summons: string[];
-}
+import { HeroDetails } from './interface/hero.interface';
+import { defaultHeroSprite, heroDetails, startingPositions } from './config/hero-service.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HeroService {
-  private resources = new Resources();
-  private hero = new Sprite({
-    asset: this.resources.availableAssets['hero'] as unknown as Asset,
-    frameSize: new Position(32, 32),
-    horizontalFrames: 3,
-    verticalFrames: 8,
-    frame: 1,
-  } as unknown as SpriteContext);
-
-  private heroDetails: HeroDetails = {
-    hp: 100,
-    ap: 100,
-    name: 'Max Fury',
-    moves: {
-      punch: {
-        hp: 25,
-      },
-      kick: {
-        hp: 35,
-      },
-    },
-    specials: [
-      {
-        name: 'Reagan Ramble',
-        hp: 55,
-      },
-    ],
-    summons: ['American Bald Eagle'],
-  };
-
-  private startingPositions: Record<number, Position> = {
-    0: new Position(16 * 6, 16 * 5),
-  };
-
+  private hero = new Sprite(defaultHeroSprite);
+  private heroDetails: HeroDetails = heroDetails;
   public heroPosition: Position = this.getStartingPosition(0);
-
-  constructor() {}
 
   /**
    * @description To return the created Sprite for the 'hero'
@@ -70,17 +22,6 @@ export class HeroService {
   }
 
   /**
-   * @description To return a starting Position for a given level, index based
-   *
-   * @function getStartingPosition
-   * @param level A key that coordinates to Positions
-   * @returns {Position}
-   */
-  public getStartingPosition(level: number = 0): Position {
-    return this.startingPositions[level];
-  }
-
-  /**
    * @description To return the meta data for the 'hero'
    *
    * @function getHeroDetails
@@ -88,6 +29,19 @@ export class HeroService {
    */
   public getHeroDetails(): HeroDetails {
     return this.heroDetails;
+  }
+
+  /**
+   * @description To return a starting Position for a given level, index based
+   *
+   * @function getStartingPosition
+   * @param level A key that coordinates to Positions
+   * @returns {Position}
+   */
+  public getStartingPosition(level: number = 0): Position {
+    const levelExist = startingPositions.has(level);
+
+    return startingPositions.get(levelExist ? level : 0) as unknown as Position;
   }
 
   public setHeroFrame(frame: number = 1): void {
@@ -106,7 +60,7 @@ export class HeroService {
     let shadowPosY = heroPosY;
 
     const shadow = new Sprite({
-      asset: this.resources.availableAssets['shadow'] as unknown as Asset,
+      asset: new Resources().availableAssets['shadow'] as unknown as Asset,
       frameSize: new Position(32, 32),
     } as unknown as SpriteContext);
 
