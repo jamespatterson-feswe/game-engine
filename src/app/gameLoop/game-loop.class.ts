@@ -1,6 +1,6 @@
 import { DestroyRef, Injectable, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { mergeMap, timer } from 'rxjs';
+import { mergeMap, of, timer } from 'rxjs';
 import {
   AnimationDirections,
   Position,
@@ -25,23 +25,6 @@ export class GameLoop {
   private walkingAnimation!: PartialFrame[];
 
   constructor() {
-    this.userInput.movementDirection$
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        mergeMap((direction: AnimationDirections) => {
-          this.walkingAnimation = walkingAnimations[direction].frames;
-          return timer(100, 400);
-        }),
-      )
-      .subscribe(() => {
-        const animation = this.walkingAnimation[0];
-
-        this.heroService.setHeroFrame(animation.frame);
-
-        this.walkingAnimation.reverse().pop();
-        this.walkingAnimation.reverse().push(animation);
-      });
-
     this.userInput.movementPostition$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((value) => {

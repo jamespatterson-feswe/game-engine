@@ -13,8 +13,12 @@ import { HeroDetails, HeroService } from '../../services';
       <p id="hud-option">
         Name: <span id="option-details">{{ heroDetails.name }}</span>
       </p>
-      <p id="hud-option">HP: <span id="option-details">{{ heroDetails.hp }}</span></p>
-      <p id="hud-option">AP: <span id="option-details">{{ heroDetails.ap }}</span></p>
+      <p id="hud-option">
+        HP: <span id="option-details">{{ heroDetails.hp }}</span>
+      </p>
+      <p id="hud-option">
+        AP: <span id="option-details">{{ heroDetails.ap }}</span>
+      </p>
     </div>
   `,
   styleUrl: './canvas.component.scss',

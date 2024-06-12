@@ -1,5 +1,5 @@
-import { Asset, Position, Resources, SpriteContext } from "../../../utils";
-import { HeroDetails } from "../interface/hero.interface";
+import { Asset, Position, Resources, SpriteContext } from '../../../utils';
+import { HeroDetails } from '../interface/hero.interface';
 
 export const defaultHeroSprite = {
   asset: new Resources().availableAssets['hero'] as unknown as Asset,

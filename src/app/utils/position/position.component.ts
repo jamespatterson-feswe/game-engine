@@ -28,7 +28,7 @@ export class Position {
   }
 
   /**
-   * @desctiption To concat two Positions together into a new Position to be returned
+   * @description To concat two Positions together into a new Position to be returned
    *
    * @function combinedPositions
    * @param {Position} position A new position to concat with 'this' Position

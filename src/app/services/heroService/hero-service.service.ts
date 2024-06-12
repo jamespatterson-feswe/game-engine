@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Asset, Position, Resources, Sprite, SpriteContext } from '../../utils';
 import { HeroDetails } from './interface/hero.interface';
-import { defaultHeroSprite, heroDetails, startingPositions } from './config/hero-service.config';
+import {
+  defaultHeroSprite,
+  heroDetails,
+  startingPositions,
+} from './config/hero-service.config';
 
 @Injectable({
   providedIn: 'root',
